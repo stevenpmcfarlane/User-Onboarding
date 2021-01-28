@@ -7,20 +7,43 @@ function UserForm(props) {
     evt.preventDefault();
     submit();
   };
-  const change = (event) => {
+  const onChange = (event) => {
     const { name, value, checked, type } = event.target;
     const valueToUse = type === "checkbox" ? checked : value;
-    change(name, valueToUse);
+    onChange(name, valueToUse);
   };
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="name">
+      <form className="container" onSubmit={onSubmit}>
+        <div className="form-group submit">
+          <h2>User Form</h2>
+
+          {/* 🔥 DISABLE THE BUTTON */}
+          <button disabled>submit</button>
+
+          <div className="errors">
+            {/* 🔥 RENDER THE VALIDATION ERRORS HERE */}
+            <div>{errors.firstName}</div>
+            <div>{errors.lastName}</div>
+            <div>{errors.email}</div>
+            <div>{errors.password}</div>
+            <div>{errors.termsOfService}</div>
+          </div>
+        </div>
+        <label htmlFor="firstname">
           <input
-            name="name"
+            name="firstName"
             type="text"
-            value={values.name}
-            onChange={change}
+            value={values.firstName}
+            onChange={onChange}
+          />
+        </label>
+        <label htmlFor="lastname">
+          <input
+            name="lastName"
+            type="text"
+            value={values.lastName}
+            onChange={onChange}
           />
         </label>
         <label htmlFor="email">
@@ -28,7 +51,7 @@ function UserForm(props) {
             name="email"
             type="email"
             value={values.email}
-            onChange={change}
+            onChange={onChange}
           />
         </label>
         <label htmlFor="password">
@@ -36,7 +59,7 @@ function UserForm(props) {
             name="password"
             type="text"
             value={values.password}
-            onChange={change}
+            onChange={onChange}
           />
         </label>
         <label htmlFor="ToS">
@@ -44,10 +67,10 @@ function UserForm(props) {
             name="termsOfService"
             type="checkbox"
             checked={values.termsOfService}
-            onChange={change}
+            onChange={onChange}
           />
         </label>
-        <button>Submit</button>
+        <button name="submit">Submit</button>
       </form>
     </div>
   );
